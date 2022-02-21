@@ -14,7 +14,7 @@ dag = DAG('Slave_Dag_for_TDR',
           start_date = datetime(2022, 2, 19),
           catchup = False)
 
-def pirnt_conf(**context):
+def print_conf(**context):
     dag_run = context['dag_run'].conf
     print('{name} said \"{talk}\"'.format(**dag_run))
 
@@ -27,7 +27,7 @@ s_task1 = DummyOperator(task_id = 'slave_task',
                         dag = dag)
 
 s_task2 = PythonOperator(task_id = 'printDagRun',
-                         python_callable=pirnt_conf,
+                         python_callable=print_conf,
                          provide_context=True,
                          dag = dag)
 
